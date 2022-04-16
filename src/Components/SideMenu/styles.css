@@ -1,0 +1,35 @@
+.container-side-menu{
+    background-color:#060b26;
+    width: 20%;
+    height: 100%;
+    display: flex;
+    border-right: 1px solid white;
+    position: fixed;
+}
+
+.container-side-menu ul{
+    width: 100%;
+    margin: 0;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.container-side-menu li{
+    color: white;
+    height: 60px;
+    font-size: 18px;
+
+    display: flex;
+    border-bottom: 1px solid;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.container-side-menu li:hover{
+    background-color: #1a83ff;
+}
+
+span{
+    margin-left: 10px;
+}
