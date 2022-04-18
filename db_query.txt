@@ -1,0 +1,12 @@
+INSERT INTO user_data (name,email,password,added_coins) VALUES ('Alexandre', 'alex@gmail.com', 123456, '{"bitcoin", "klay", "bnb"}')
+INSERT INTO user_data (name,email,password,added_coins) VALUES ('Teste', 'teste@gmail.com', 1234567, '{"ethereum", "klay", "bnb"}')
+UPDATE user_data SET added_coins = ARRAY['ethereum','klay-token','binancecoin','bitcoin','basic-attention-token'] WHERE id = '1';
+SELECT * FROM user_data;
+
+UPDATE user_data SET access_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkFsZXhhbmRyZSIsImVtYWlsIjoiYWxleEBnbWFpbC5jb20iLCJhZGRlZF9jb2lucyI6WyJldGhlcmV1bSIsImtsYXkiLCJibmIiLCJ1c2R0Il0sImlhdCI6MTY1MDE3ODM5Nn0.gKrnSS_79sPl6ofmscC67Ipgq0i3P8W_jTKSxSVHEQU' WHERE email = 'alex@gmail.com';
+
+SELECT (name,email,added_coins,access_token) FROM user_data WHERE access_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkFsZXhhbmRyZSIsImVtYWlsIjoiYWxleEBnbWFpbC5jb20iLCJhZGRlZF9jb2lucyI6WyJldGhlcmV1bSIsImtsYXkiLCJibmIiLCJ1c2R0Il0sImlhdCI6MTY1MDE4MDczM30.oszTXjWcYOlkL0mht-AKKqLd_0UiPPpA5fkH8HhzfxI';
+
+SELECT COUNT(*) FROM user_data WHERE email = ${email}
+
+UPDATE user_data SET added_coins = ARRAY['ethereum','binancecoin','bitcoin','basic-attention-token'] WHERE id = '1';

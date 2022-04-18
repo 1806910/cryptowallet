@@ -1,7 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../config/api/api";
-import RouteConfig from "../config/routes";
 
 const Context = createContext();
 
@@ -10,6 +9,7 @@ function AuthProvider({ children }) {
   const [user, setUser] = useState();
   let navigate = useNavigate();
 
+  //Manter usuário logado após reload da página
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -20,23 +20,27 @@ function AuthProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    if (authenticated) {
+    const token = localStorage.getItem("token");
+
+    if (authenticated) { 
       (async () => {
-        const { data } = await api.get("/mywallet");
-        setUser(data);
-        console.log("Fez um request")
+        const response = await api.post(
+          "/user-data",
+          JSON.stringify({token}),
+          {
+            headers: { "Content-type": "Application/json" },
+          }
+        );
+        setUser(response.data.user);
       })();
+      console.log("Fez request")
     }
   }, [authenticated]);
 
-  async function handleLogin() {
-    const {
-      data: { token },
-    } = await api.post("/login");
-    localStorage.setItem("token", JSON.stringify(token));
-    api.defaults.headers.Authorization = `Bearer ${token}`;
+  function handleAuth(data) {
+    localStorage.setItem("token", JSON.stringify(data.token));
+    api.defaults.headers.Authorization = `Bearer ${data.token}`;
     setAuthenticated(true);
-    navigate("/");
   }
 
   function handleLogout() {
@@ -50,7 +54,7 @@ function AuthProvider({ children }) {
     <Context.Provider
       value={{
         authenticated,
-        handleLogin,
+        handleAuth,
         handleLogout,
         user,
       }}

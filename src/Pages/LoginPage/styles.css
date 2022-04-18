@@ -21,6 +21,14 @@
     flex-direction: column;
 }
 
+.row-message-green{
+    color:green
+}
+
+.row-message-red{
+    color:red;
+}
+
 .row-user{
     display: flex;
     width: 100%;

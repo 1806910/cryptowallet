@@ -12,7 +12,6 @@ async function validate(req, res, next) {
 
   try {
     await promisify(jwt.verify)(token, 'PRIVATEKEY');
-
     return next();
   } catch (err) {
     return res.sendStatus(401);
