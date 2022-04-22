@@ -1,27 +1,35 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { BeatLoader } from "react-spinners";
-import CoinRow from "../../Components/CoinRow/Coin";
+import CoinRow from "../../Components/CoinRow/CoinRow";
+import Header from "../../Components/Header/Header";
 import SideMenu from "../../Components/SideMenu/SideMenu";
 import api from "../../config/api/api";
 import { Context } from "../../Context/AuthContext";
 import "./styles.css";
 
 function MyWalletPage() {
-  const { handleLogout, user } = useContext(Context);
+  const { handleLogout, user, handleSetRequestTrue, authenticated } =
+    useContext(Context);
   const [addedCoins, setAddedCoins] = useState();
 
   useEffect(() => {
-    axios
-      .get(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false"
-      )
-      .then((res) => {
-        if (user) {
+    if (authenticated) {
+      handleSetRequestTrue();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      axios
+        .get(
+          "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false"
+        )
+        .then((res) => {
           verifyAddedCoins(res.data);
-        }
-      })
-      .catch((error) => console.log(error));
+        })
+        .catch((error) => console.log(error));
+    }
   }, [user]);
 
   function verifyAddedCoins(coins) {
@@ -36,17 +44,20 @@ function MyWalletPage() {
 
   function handleDelete(id) {
     let userId = user.id;
-    let newAddedCoinsArray = addedCoins.filter((item) => item.id !== id);
+    let coinId = id;
+
     api
-      .post("/delete-coin", JSON.stringify({ userId, newAddedCoinsArray }), {
-        headers: { "Content-type": "Application/json" },
-      })
+      .delete(`/delete-coin/${userId}/${coinId}`)
       .then((res) => {
-        console.log("delete retornou isso", res.data.newArray.added_coins);
-        let newAddedCoinsArray = addedCoins.filter((item) => item.id !== id);
-        //setAddedCoins(res.data.newArray.added_coins);
+        let newAddedCoinsArray = [];
+        addedCoins.forEach((coin) => {
+          if (res.data.newArray.includes(coin.id)) {
+            newAddedCoinsArray.push(coin);
+          }
+        });
         setAddedCoins(newAddedCoinsArray);
-      });
+      })
+      .catch((error) => console.log(error));
   }
 
   return (
@@ -56,26 +67,30 @@ function MyWalletPage() {
       </div>
 
       <div className="mywallet-container">
+        <Header />
         <div className="mywallet-table-header">
           <div className="mywallet-coin-remove">
-            <h3>#</h3>
+            <h4>#</h4>
           </div>
           <div className="mywallet-coin-name">
-            <h3>Coin</h3>
+            <h4>Coin</h4>
           </div>
           <div className="mywallet-coin-symbol">
-            <h3>Symbol</h3>
+            <h4>Symbol</h4>
           </div>
           <div className="mywallet-coin-price">
-            <h3>Price</h3>
+            <h4>Price</h4>
           </div>
-          <div className="mywallet-coin-market-cap">
-            <h3>Market Cap</h3>
+          <div className="mywallet-coin-quantity">
+            <h4>Quantity</h4>
+          </div>
+          <div className="mywallet-coin-profit-loss">
+            <h4>Profit / Loss</h4>
           </div>
         </div>
         <div className="coinrow-container-content">
           {addedCoins ? (
-            addedCoins?.map((coin) => {
+            addedCoins.map((coin) => {
               return (
                 <CoinRow
                   key={coin.id}

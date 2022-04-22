@@ -68,6 +68,32 @@ router.post("/login", (req, res) => {
   }
 });
 
+/**
+ * Private route
+ */
+router.use(authMiddleware);
+
+router.delete("/delete-coin/:userId/:coinId", (req, res) => {
+  const { userId, coinId } = req.params;
+
+  db.query(
+    `SELECT array_remove(added_coins, '${coinId}')FROM user_data WHERE id = '${userId}'`,
+    (error, results) => {
+      let newAddedCoinsArray = results.rows[0].array_remove;
+      db.query(
+        `UPDATE user_data SET added_coins = '{${newAddedCoinsArray}}' WHERE id = '${userId}' RETURNING added_coins`,
+        (error, results) => {
+          let newArray = results.rows[0].added_coins;
+          res.status(200).json({
+            newArray,
+            message: "Delete successful",
+          });
+        }
+      );
+    }
+  );
+});
+
 //Request para dados do usuário
 router.post("/user-data", (req, res) => {
   const { token } = req.body;
@@ -91,32 +117,6 @@ router.post("/user-data", (req, res) => {
   } catch (error) {
     console.log(error);
   }
-});
-
-/**
- * Private route
- */
-router.use(authMiddleware);
-
-router.post("/delete-coin", async (req, res) => {
-  const { userId, newAddedCoinsArray } = req.body;
-
-  let auxArray = [];
-
-  newAddedCoinsArray.forEach((element) => {
-    auxArray.push(element.id);
-  });
-
-  db.query(
-    `UPDATE user_data SET added_coins = '{${auxArray}}' WHERE id = '${userId}' RETURNING added_coins`,
-    (error, results) => {
-      const newArray = { added_coins: results.rows[0].added_coins };
-      res.status(200).json({
-        newArray,
-        message: "Delete successful",
-      });
-    }
-  );
 });
 
 module.exports = router;

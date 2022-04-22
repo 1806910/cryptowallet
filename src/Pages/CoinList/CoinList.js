@@ -1,17 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./styles.css";
 import axios from "axios";
 import Header from "../../Components/Header/Header";
 import SideMenu from "../../Components/SideMenu/SideMenu";
 import { useNavigate } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
+import { Context } from "../../Context/AuthContext";
 
 function CoinList() {
+  const { authenticated, handleSetRequestTrue } = useContext(Context);
   const [loading, setLoading] = useState(true);
   const [coins, setCoins] = useState([]);
   const [search, setSearch] = useState("");
   let navigate = useNavigate();
-
+/*
+  useEffect(() => {
+    if (authenticated) {
+      console.log("entrou request");
+      handleSetRequestTrue();
+    }
+  }, [authenticated]);
+*/
   useEffect(() => {
     axios
       .get(

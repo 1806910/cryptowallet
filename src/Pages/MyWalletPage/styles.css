@@ -15,7 +15,7 @@
   color: white;
 }
 
-.mywallet-table-header{
+.mywallet-table-header {
   width: 80%;
   height: 60px;
   display: flex;
@@ -25,7 +25,7 @@
   border-right: 1px solid white;
 }
 
-.mywallet-coin-name{
+.mywallet-coin-name {
   display: flex;
   width: 25%;
   height: 100%;
@@ -34,7 +34,7 @@
   justify-content: center;
 }
 
-.mywallet-coin-symbol{
+.mywallet-coin-symbol {
   display: flex;
   width: 10%;
   height: 100%;
@@ -42,30 +42,38 @@
   align-items: center;
   justify-content: center;
 }
-.mywallet-coin-price{
+.mywallet-coin-price {
   display: flex;
-  width: 30%;
+  width: 20%;
+  height: 100%;
+  border-right: 1px solid white;
+  align-items: center;
+  justify-content: center;
+}
+.mywallet-coin-quantity {
+  display: flex;
+  width: 15%;
   height: 100%;
   border-right: 1px solid white;
   align-items: center;
   justify-content: center;
 }
 
-.mywallet-coin-market-cap{
+.mywallet-coin-profit-loss {
   display: flex;
-  width: 30%;
+  width: 25%;
   height: 100%;
   align-items: center;
   justify-content: center;
 }
 
-.coinrow-container-content{
+.coinrow-container-content {
   display: flex;
   width: 80%;
   flex-direction: column;
 }
 
-.mywallet-coin-remove{
+.mywallet-coin-remove {
   display: flex;
   width: 5%;
   height: 100%;

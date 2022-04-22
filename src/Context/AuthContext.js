@@ -6,6 +6,7 @@ const Context = createContext();
 
 function AuthProvider({ children }) {
   const [authenticated, setAuthenticated] = useState(false);
+  const [requestTrue, setRequestTrue] = useState(true);
   const [user, setUser] = useState();
   let navigate = useNavigate();
 
@@ -22,7 +23,7 @@ function AuthProvider({ children }) {
   useEffect(() => {
     const token = localStorage.getItem("token");
 
-    if (authenticated) { 
+    if (authenticated && requestTrue) { 
       (async () => {
         const response = await api.post(
           "/user-data",
@@ -32,10 +33,15 @@ function AuthProvider({ children }) {
           }
         );
         setUser(response.data.user);
+        setRequestTrue(false);
       })();
       console.log("Fez request")
     }
-  }, [authenticated]);
+  }, [authenticated, requestTrue]);
+
+  function handleSetRequestTrue(){
+    setRequestTrue(true);
+  }
 
   function handleAuth(data) {
     localStorage.setItem("token", JSON.stringify(data.token));
@@ -57,6 +63,7 @@ function AuthProvider({ children }) {
         handleAuth,
         handleLogout,
         user,
+        handleSetRequestTrue
       }}
     >
       {children}

@@ -19,7 +19,10 @@ function CoinRow({ id, handleDelete, icon, name, symbol, price, market_cap }) {
       <div className="coinrow-coin-price">
         <p>$ {price}</p>
       </div>
-      <div className="coinrow-coin-market-cap">
+      <div className="coinrow-coin-quantity">
+        <p>358.000.000</p>
+      </div>
+      <div className="coinrow-coin-profit-loss">
         <p>$ {market_cap.toLocaleString()}</p>
       </div>
     </div>
