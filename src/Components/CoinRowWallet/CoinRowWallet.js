@@ -1,7 +1,15 @@
 import "./styles.css";
 import { FaTrashAlt } from "react-icons/fa";
 
-function CoinRow({ id, handleDelete, icon, name, symbol, price, market_cap }) {
+function CoinRowWallet({
+  id,
+  handleDelete,
+  icon,
+  name,
+  symbol,
+  price,
+  market_cap,
+}) {
   return (
     <div className="coinrow-container">
       <div className="coinrow-coin-remove">
@@ -29,4 +37,4 @@ function CoinRow({ id, handleDelete, icon, name, symbol, price, market_cap }) {
   );
 }
 
-export default CoinRow;
+export default CoinRowWallet;

@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { BeatLoader } from "react-spinners";
-import CoinRow from "../../Components/CoinRow/CoinRow";
+import CoinRowWallet from "../../Components/CoinRowWallet/CoinRowWallet";
 import Header from "../../Components/Header/Header";
 import SideMenu from "../../Components/SideMenu/SideMenu";
 import api from "../../config/api/api";
@@ -9,9 +9,9 @@ import { Context } from "../../Context/AuthContext";
 import "./styles.css";
 
 function MyWalletPage() {
-  const { handleLogout, user, handleSetRequestTrue, authenticated } =
-    useContext(Context);
+  const { user, handleSetRequestTrue, authenticated } = useContext(Context);
   const [addedCoins, setAddedCoins] = useState();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (authenticated) {
@@ -27,6 +27,7 @@ function MyWalletPage() {
         )
         .then((res) => {
           verifyAddedCoins(res.data);
+          setLoading(false);
         })
         .catch((error) => console.log(error));
     }
@@ -88,11 +89,14 @@ function MyWalletPage() {
             <h4>Profit / Loss</h4>
           </div>
         </div>
-        <div className="coinrow-container-content">
-          {addedCoins ? (
+        <div className="mywallet-container-content">
+          {loading ? (
+            <BeatLoader loading={loading} size={15} color="white" />
+          ) : (
+            addedCoins &&
             addedCoins.map((coin) => {
               return (
-                <CoinRow
+                <CoinRowWallet
                   key={coin.id}
                   id={coin.id}
                   handleDelete={handleDelete}
@@ -104,8 +108,6 @@ function MyWalletPage() {
                 />
               );
             })
-          ) : (
-            <BeatLoader size={15} color="white" />
           )}
         </div>
       </div>

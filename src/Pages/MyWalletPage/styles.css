@@ -67,7 +67,7 @@
   justify-content: center;
 }
 
-.coinrow-container-content {
+.mywallet-container-content {
   display: flex;
   width: 80%;
   flex-direction: column;

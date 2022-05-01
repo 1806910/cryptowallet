@@ -4,7 +4,7 @@
   height: 100%;
 }
 
-.coinlist-container-content {
+.coinlist-container {
   display: flex;
   width: 80%;
   height: 100%;
@@ -12,57 +12,76 @@
   justify-content: center;
   align-items: center;
   margin-left: auto;
-}
-
-.coin-container {
-  display: flex;
   color: white;
-  width: 80%;
 }
 
-.coin-row {
-  display: flex;
-  flex-direction: row;
-  justify-items: start;
-  align-items: center;
-  border-bottom: 1px solid white;
-  width: 100%;
-  height: 80px;
+.coinlist-row :hover {
   cursor: pointer;
 }
 
-.coin-view-div-1 {
+.coinlist-table-header {
+  width: 80%;
+  height: 60px;
   display: flex;
+  background-color: #060b26;
+  border-bottom: 1px solid white;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+}
+
+.coinlist-coin-name {
+  display: flex;
+  width: 25%;
+  height: 100%;
+  border-right: 1px solid white;
   align-items: center;
-  padding-right: 24px;
-  min-width: 300px;
+  justify-content: center;
 }
 
-.coin-view-div-1 h1 {
-  font-size: 16px;
-  width: 150px;
-}
-.coin-view-div-1 img {
-  height: 30px;
-  width: 30px;
-  margin-right: 10px;
-}
-
-.coin-view-div-2 {
+.coinlist-coin-symbol {
   display: flex;
-  text-align: center;
-  justify-content: space-between;
-  width: 100%;
+  width: 10%;
+  height: 100%;
+  border-right: 1px solid white;
+  align-items: center;
+  justify-content: center;
+}
+.coinlist-coin-price {
+  display: flex;
+  width: 20%;
+  height: 100%;
+  border-right: 1px solid white;
+  align-items: center;
+  justify-content: center;
+}
+.coinlist-coin-quantity {
+  display: flex;
+  width: 15%;
+  height: 100%;
+  border-right: 1px solid white;
+  align-items: center;
+  justify-content: center;
 }
 
-.coin-symbol {
-  text-transform: uppercase;
+.coinlist-coin-profit-loss {
+  display: flex;
+  width: 25%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
-.coin-price {
-  width: 110px;
+.coinlist-container-content {
+  display: flex;
+  width: 80%;
+  flex-direction: column;
 }
 
-.coin-marketcap {
-  width: 200px;
+.coinlist-coin-remove {
+  display: flex;
+  width: 5%;
+  height: 100%;
+  border-right: 1px solid white;
+  align-items: center;
+  justify-content: center;
 }
