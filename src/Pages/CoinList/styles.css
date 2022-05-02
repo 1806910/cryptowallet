@@ -15,10 +15,6 @@
   color: white;
 }
 
-.coinlist-row :hover {
-  cursor: pointer;
-}
-
 .coinlist-table-header {
   width: 80%;
   height: 60px;
@@ -54,7 +50,7 @@
   align-items: center;
   justify-content: center;
 }
-.coinlist-coin-quantity {
+.coinlist-coin-change {
   display: flex;
   width: 15%;
   height: 100%;
@@ -63,7 +59,7 @@
   justify-content: center;
 }
 
-.coinlist-coin-profit-loss {
+.coinlist-coin-marketcap {
   display: flex;
   width: 25%;
   height: 100%;
@@ -77,7 +73,7 @@
   flex-direction: column;
 }
 
-.coinlist-coin-remove {
+.coinlist-coin-add {
   display: flex;
   width: 5%;
   height: 100%;

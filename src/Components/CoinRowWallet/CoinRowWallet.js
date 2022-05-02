@@ -1,5 +1,5 @@
 import "./styles.css";
-import { FaTrashAlt } from "react-icons/fa";
+import { MdRemoveCircle } from "react-icons/md";
 
 function CoinRowWallet({
   id,
@@ -11,26 +11,26 @@ function CoinRowWallet({
   market_cap,
 }) {
   return (
-    <div className="coinrow-container">
-      <div className="coinrow-coin-remove">
-        <FaTrashAlt onClick={() => handleDelete(id)} />
+    <div className="coinrowwallet-container">
+      <div className="coinrowwallet-coin-remove">
+        <MdRemoveCircle onClick={() => handleDelete(id)} size={25} color='red'/>
       </div>
-      <div className="coinrow-coin-icon">
+      <div className="coinrowwallet-coin-icon">
         <img src={icon} alt={name} />
       </div>
-      <div className="coinrow-coin-name">
+      <div className="coinrowwallet-coin-name">
         <h4>{name}</h4>
       </div>
-      <div className="coinrow-coin-symbol">
+      <div className="coinrowwallet-coin-symbol">
         <h3>{symbol}</h3>
       </div>
-      <div className="coinrow-coin-price">
+      <div className="coinrowwallet-coin-price">
         <p>$ {price}</p>
       </div>
-      <div className="coinrow-coin-quantity">
+      <div className="coinrowwallet-coin-quantity">
         <p>358.000.000</p>
       </div>
-      <div className="coinrow-coin-profit-loss">
+      <div className="coinrowwallet-coin-profit-loss">
         <p>$ {market_cap.toLocaleString()}</p>
       </div>
     </div>
