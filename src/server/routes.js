@@ -119,4 +119,29 @@ router.post("/user-data", (req, res) => {
   }
 });
 
+router.post("/add-coin", (req, res) => {
+  const { userId, coinId } = req.body;
+
+  try {
+    db.query(
+      `SELECT added_coins FROM user_data WHERE id = '${userId}'`,
+      (error, results) => {
+        let oldAddedCoinsList = results.rows[0].added_coins;
+        let newAddedCoinsList = oldAddedCoinsList.concat(coinId);
+        db.query(
+          `UPDATE user_data SET added_coins = '{${newAddedCoinsList}}' WHERE id = '${userId}' RETURNING added_coins`,
+          (error, results) => {
+            let newAddedCoinsList = results.rows[0].added_coins;
+            res.status(200).json({
+              newAddedCoinsList,
+            });
+          }
+        );
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 module.exports = router;

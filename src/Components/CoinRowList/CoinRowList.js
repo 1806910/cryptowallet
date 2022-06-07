@@ -2,8 +2,7 @@ import "./styles.css";
 import { MdAddCircle } from "react-icons/md";
 import { MdRemoveCircle } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { Context } from "../../Context/AuthContext";
+
 
 function CoinRowList({
   id,

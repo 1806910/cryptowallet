@@ -6,21 +6,30 @@ import SideMenu from "../../Components/SideMenu/SideMenu";
 import { BeatLoader } from "react-spinners";
 import { Context } from "../../Context/AuthContext";
 import CoinRowList from "../../Components/CoinRowList/CoinRowList";
+import api from "../../config/api/api";
+import { useNavigate } from "react-router-dom";
 
 function CoinList() {
-  const { authenticated, handleSetRequestTrue,user } = useContext(Context);
+  const { authenticated, handleSetRequestTrue, user } = useContext(Context);
   const [loading, setLoading] = useState(true);
   const [coins, setCoins] = useState([]);
   const [search, setSearch] = useState("");
-  
-  /*
+  const [addedCoins, setAddedCoins] = useState([]);
+
+  let navigate = useNavigate();
+
   useEffect(() => {
     if (authenticated) {
-      console.log("entrou request");
       handleSetRequestTrue();
     }
-  }, [authenticated]);
-*/
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      setAddedCoins(user.added_coins);
+    }
+  }, [user]);
+
   useEffect(() => {
     axios
       .get(
@@ -41,11 +50,26 @@ function CoinList() {
   );
 
   function handleDelete(id) {
-    console.log('delete',id);
+    console.log("delete", id);
   }
 
   function handleAdd(id) {
-    console.log('add',id);
+    if (authenticated) {
+      let userId = user.id;
+      let coinId = id;
+
+      api
+        .post("/add-coin", JSON.stringify({ userId, coinId }), {
+          headers: { "Content-type": "Application/json" },
+        })
+        .then((res) => {
+          setAddedCoins(res.data.newAddedCoinsList);
+          console.log(res);
+        })
+        .catch((error) => console.log(error));
+    } else {
+      navigate("/login");
+    }
   }
 
   return (
@@ -80,25 +104,21 @@ function CoinList() {
             <BeatLoader loading={loading} size={15} color="white" />
           ) : (
             filteredCoins.map((coin) => {
-              const isAdded = user?.added_coins.includes(coin.id);
+              const isAdded = addedCoins?.includes(coin.id);
               return (
-                
-                  <CoinRowList
-                    key={coin.id}
-                    id={coin.id}
-                    icon={coin.image}
-                    name={coin.name}
-                    symbol={coin.symbol}
-                    price={coin.current_price}
-                    price_change_percentage_24h={
-                      coin.price_change_percentage_24h
-                    }
-                    market_cap={coin.market_cap}
-                    handleDelete={handleDelete}
-                    handleAdd={handleAdd}
-                    isAdded={isAdded && authenticated}
-                  />
-                
+                <CoinRowList
+                  key={coin.id}
+                  id={coin.id}
+                  icon={coin.image}
+                  name={coin.name}
+                  symbol={coin.symbol}
+                  price={coin.current_price}
+                  price_change_percentage_24h={coin.price_change_percentage_24h}
+                  market_cap={coin.market_cap}
+                  handleDelete={handleDelete}
+                  handleAdd={handleAdd}
+                  isAdded={isAdded && authenticated}
+                />
               );
             })
           )}

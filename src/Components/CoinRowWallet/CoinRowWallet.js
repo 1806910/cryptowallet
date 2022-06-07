@@ -28,10 +28,10 @@ function CoinRowWallet({
         <p>$ {price}</p>
       </div>
       <div className="coinrowwallet-coin-quantity">
-        <p>358.000.000</p>
+        <p>*</p>
       </div>
       <div className="coinrowwallet-coin-profit-loss">
-        <p>$ {market_cap.toLocaleString()}</p>
+        <p>$0,000</p>
       </div>
     </div>
   );
