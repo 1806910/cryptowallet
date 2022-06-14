@@ -81,22 +81,22 @@ function CoinList() {
         <Header setSearch={setSearch} />
         <div className="coinlist-table-header">
           <div className="coinlist-coin-add">
-            <h4>#</h4>
+            <h5>#</h5>
           </div>
           <div className="coinlist-coin-name">
-            <h4>Coin</h4>
+            <h5>Coin</h5>
           </div>
           <div className="coinlist-coin-symbol">
-            <h4>Symbol</h4>
+            <h5>Symbol</h5>
           </div>
           <div className="coinlist-coin-price">
-            <h4>Price</h4>
+            <h5>Price</h5>
           </div>
           <div className="coinlist-coin-change">
-            <h4>Price Change 24h</h4>
+            <h5>Price Change 24h</h5>
           </div>
           <div className="coinlist-coin-marketcap">
-            <h4>Market Cap</h4>
+            <h5>Market Cap</h5>
           </div>
         </div>
         <div className="coinlist-container-content">

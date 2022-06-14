@@ -71,22 +71,25 @@ function MyWalletPage() {
         <Header />
         <div className="mywallet-table-header">
           <div className="mywallet-coin-remove">
-            <h4>#</h4>
+            <h5>#</h5>
           </div>
           <div className="mywallet-coin-name">
-            <h4>Coin</h4>
+            <h5>Coin</h5>
           </div>
           <div className="mywallet-coin-symbol">
-            <h4>Symbol</h4>
+            <h5>Symbol</h5>
           </div>
           <div className="mywallet-coin-price">
-            <h4>Price</h4>
+            <h5>Price</h5>
           </div>
           <div className="mywallet-coin-quantity">
-            <h4>Quantity</h4>
+            <h5>Quantity</h5>
+          </div>
+          <div className="mywallet-coin-buyprice">
+            <h5>Buy Price</h5>
           </div>
           <div className="mywallet-coin-profit-loss">
-            <h4>Profit / Loss</h4>
+            <h5>Profit / Loss</h5>
           </div>
         </div>
         <div className="mywallet-container-content">
@@ -104,7 +107,6 @@ function MyWalletPage() {
                   name={coin.name}
                   symbol={coin.symbol}
                   price={coin.current_price}
-                  market_cap={coin.market_cap}
                 />
               );
             })

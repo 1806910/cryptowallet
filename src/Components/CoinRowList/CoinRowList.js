@@ -40,10 +40,10 @@ function CoinRowList({
           navigate(`/coin/${id}`);
         }}
       >
-        <h4>{name}</h4>
+        <h5>{name}</h5>
       </div>
       <div className="coinrowlist-coin-symbol">
-        <h3>{symbol}</h3>
+        <h5>{symbol}</h5>
       </div>
       <div className="coinrowlist-coin-price">
         <p>$ {price}</p>
@@ -55,7 +55,7 @@ function CoinRowList({
             : "coinrowlist-coin-change-green"
         }
       >
-        <p>{price_change_percentage_24h.toFixed(2)}%</p>
+        <p>{price_change_percentage_24h?.toFixed(2)}%</p>
       </div>
       <div className="coinrowlist-coin-marketcap">
         <p>$ {market_cap.toLocaleString()}</p>

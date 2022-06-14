@@ -52,7 +52,16 @@
 }
 .mywallet-coin-quantity {
   display: flex;
-  width: 15%;
+  width: 10%;
+  height: 100%;
+  border-right: 1px solid white;
+  align-items: center;
+  justify-content: center;
+}
+
+.mywallet-coin-buyprice{
+  display: flex;
+  width: 10%;
   height: 100%;
   border-right: 1px solid white;
   align-items: center;
@@ -61,7 +70,7 @@
 
 .mywallet-coin-profit-loss {
   display: flex;
-  width: 25%;
+  width: 20%;
   height: 100%;
   align-items: center;
   justify-content: center;
