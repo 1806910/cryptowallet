@@ -26,7 +26,11 @@ function CoinList() {
 
   useEffect(() => {
     if (user) {
-      setAddedCoins(user.added_coins);
+      let userCoins = [];
+      user?.teste_json?.forEach((obj) => {
+        userCoins.push(obj.coin);
+      });
+      setAddedCoins(userCoins);
     }
   }, [user]);
 
@@ -50,7 +54,21 @@ function CoinList() {
   );
 
   function handleDelete(id) {
-    console.log("delete", id);
+    let userId = user.id;
+    let coinId = id;
+
+    api
+      .delete(`/delete-coin/${userId}/${coinId}`)
+      .then((res) => {
+        let newAddedCoinsArray = [];
+        addedCoins.forEach((coin) => {
+          if (coin !== coinId) {
+            newAddedCoinsArray.push(coin);
+          }
+        });
+        setAddedCoins(newAddedCoinsArray);
+      })
+      .catch((error) => console.log(error));
   }
 
   function handleAdd(id) {
@@ -63,8 +81,11 @@ function CoinList() {
           headers: { "Content-type": "Application/json" },
         })
         .then((res) => {
-          setAddedCoins(res.data.newAddedCoinsList);
-          console.log(res);
+          let coinsId = [];
+          res.data.newAddedCoinsList.forEach((obj) => {
+            coinsId.push(obj.coin);
+          });
+          setAddedCoins([...coinsId]);
         })
         .catch((error) => console.log(error));
     } else {

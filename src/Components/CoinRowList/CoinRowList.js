@@ -24,11 +24,11 @@ function CoinRowList({
         {isAdded ? (
           <MdRemoveCircle
             onClick={() => handleDelete(id)}
-            size={25}
+            size={20}
             color="red"
           />
         ) : (
-          <MdAddCircle onClick={() => handleAdd(id)} size={25} />
+          <MdAddCircle onClick={() => handleAdd(id)} size={20} />
         )}
       </div>
       <div className="coinrowlist-coin-icon">

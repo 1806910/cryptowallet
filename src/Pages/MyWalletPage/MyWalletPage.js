@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { BeatLoader } from "react-spinners";
 import CoinRowWallet from "../../Components/CoinRowWallet/CoinRowWallet";
 import Header from "../../Components/Header/Header";
+import Modal from "../../Components/Modal/Modal";
 import SideMenu from "../../Components/SideMenu/SideMenu";
 import api from "../../config/api/api";
 import { Context } from "../../Context/AuthContext";
@@ -12,6 +13,7 @@ function MyWalletPage() {
   const { user, handleSetRequestTrue, authenticated } = useContext(Context);
   const [addedCoins, setAddedCoins] = useState();
   const [loading, setLoading] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     if (authenticated) {
@@ -36,8 +38,13 @@ function MyWalletPage() {
   function verifyAddedCoins(coins) {
     let auxArray = [];
     for (let i = 0; i < coins.length; i++) {
-      if (user?.added_coins.includes(coins[i].id)) {
-        auxArray.push(coins[i]);
+      for (let j = 0; j < user?.teste_json?.length; j++) {
+        console.log("leng", user.teste_json.length);
+        if (user?.teste_json[j].coin === coins[i].id) {
+          coins[i].qtt = Number(user.teste_json[j].qtt);
+          coins[i].buyprice = Number(user.teste_json[j].buyprice);
+          auxArray.push(coins[i]);
+        }
       }
     }
     setAddedCoins(auxArray);
@@ -51,8 +58,9 @@ function MyWalletPage() {
       .delete(`/delete-coin/${userId}/${coinId}`)
       .then((res) => {
         let newAddedCoinsArray = [];
+
         addedCoins.forEach((coin) => {
-          if (res.data.newArray.includes(coin.id)) {
+          if (coin.id !== coinId) {
             newAddedCoinsArray.push(coin);
           }
         });
@@ -63,6 +71,8 @@ function MyWalletPage() {
 
   return (
     <>
+      {isOpen && <Modal setIsOpen={setIsOpen} />}
+
       <div className="mywallet-side-menu">
         <SideMenu />
       </div>
@@ -98,6 +108,7 @@ function MyWalletPage() {
           ) : (
             addedCoins &&
             addedCoins.map((coin) => {
+              console.log(addedCoins);
               return (
                 <CoinRowWallet
                   key={coin.id}
@@ -107,6 +118,9 @@ function MyWalletPage() {
                   name={coin.name}
                   symbol={coin.symbol}
                   price={coin.current_price}
+                  qtt={coin.qtt}
+                  buyprice={coin.buyprice}
+                  setIsOpen={setIsOpen}
                 />
               );
             })

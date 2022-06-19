@@ -1,15 +1,26 @@
 import "./styles.css";
-import { MdRemoveCircle } from "react-icons/md";
+import { MdRemoveCircle, MdModeEdit } from "react-icons/md";
 
-function CoinRowWallet({ id, handleDelete, icon, name, symbol, price }) {
+function CoinRowWallet({
+  id,
+  handleDelete,
+  icon,
+  name,
+  symbol,
+  price,
+  qtt,
+  buyprice,
+  setIsOpen,
+}) {
   return (
     <div className="coinrowwallet-container">
       <div className="coinrowwallet-coin-remove">
         <MdRemoveCircle
           onClick={() => handleDelete(id)}
-          size={25}
+          size={20}
           color="red"
         />
+        <MdModeEdit onClick={() => setIsOpen(true)} size={20} color="white" />
       </div>
       <div className="coinrowwallet-coin-icon">
         <img src={icon} alt={name} />
@@ -24,13 +35,13 @@ function CoinRowWallet({ id, handleDelete, icon, name, symbol, price }) {
         <p>$ {price}</p>
       </div>
       <div className="coinrowwallet-coin-quantity">
-        <p>*</p>
+        <p>{qtt}</p>
       </div>
       <div className="coinrowwallet-coin-buyprice">
-        <p>$0,00</p>
+        <p>$ {buyprice.toFixed(2)}</p>
       </div>
       <div className="coinrowwallet-coin-profit-loss">
-        <p>$0,000</p>
+        <p>$ </p>
       </div>
     </div>
   );

@@ -10,3 +10,10 @@ SELECT (name,email,added_coins,access_token) FROM user_data WHERE access_token =
 SELECT COUNT(*) FROM user_data WHERE email = ${email}
 
 UPDATE user_data SET added_coins = ARRAY['ethereum','binancecoin','bitcoin','basic-attention-token'] WHERE id = '1';
+
+SELECT teste_json FROM user_data WHERE id='2';
+UPDATE user_data SET teste_json = null;
+UPDATE user_data SET teste_json = teste_json || '{"coin": "ethereum", "qtt":"0", "buyprice":"0"}' ::jsonb WHERE id = '2';
+UPDATE user_data SET teste_json = COALESCE(teste_json, '[]'::jsonb) || '{"coin": "ethereum", "qtt":"300", "buyprice":"1.70"}' ::jsonb WHERE id = '2';
+
+UPDATE user_data SET teste_json=teste_json -0 WHERE id=2
