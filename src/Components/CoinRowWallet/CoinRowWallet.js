@@ -11,6 +11,7 @@ function CoinRowWallet({
   qtt,
   buyprice,
   setIsOpen,
+  setSelectedCoin,
 }) {
   return (
     <div className="coinrowwallet-container">
@@ -20,7 +21,18 @@ function CoinRowWallet({
           size={20}
           color="red"
         />
-        <MdModeEdit onClick={() => setIsOpen(true)} size={20} color="white" />
+        <MdModeEdit
+          onClick={() => {
+            setIsOpen(true);
+            setSelectedCoin({
+              coinIcon: icon,
+              coinName: name,
+              coinId: id,
+            });
+          }}
+          size={20}
+          color="white"
+        />
       </div>
       <div className="coinrowwallet-coin-icon">
         <img src={icon} alt={name} />

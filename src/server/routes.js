@@ -73,6 +73,33 @@ router.post("/login", (req, res) => {
  */
 router.use(authMiddleware);
 
+router.post("/edit", (req, res) => {
+  const { userId, coinId, coinQTT, coinBuyprice } = req.body;
+
+  let selectedCoinObject = { coin: coinId, qtt: coinQTT, buyprice: coinBuyprice };
+
+  db.query(
+    `SELECT teste_json FROM user_data WHERE id='${userId}'`,
+    (error, results) => {
+      let oldAddedCoinsList = results.rows[0].teste_json;
+
+      for (let i = 0; i < oldAddedCoinsList.length; i++) {
+        if (oldAddedCoinsList[i].coin === coinId) {
+          db.query(
+            `UPDATE user_data SET teste_json = jsonb_set(teste_json, '{${i}}', '{"coin":"${coinId}","qtt":"${coinQTT}","buyprice":"${coinBuyprice}"}', true) WHERE id='${userId}' RETURNING teste_json`,
+            (error, results) => {
+              let newAddedCoinsArray = results.rows[0].teste_json;
+              res.status(200).json({
+                newAddedCoinsArray,
+              });
+            }
+          );
+        }
+      }
+    }
+  );
+});
+
 router.delete("/delete-coin/:userId/:coinId", (req, res) => {
   const { userId, coinId } = req.params;
 
@@ -96,25 +123,6 @@ router.delete("/delete-coin/:userId/:coinId", (req, res) => {
       }
     }
   );
-
-  /*
-  db.query(
-    `SELECT array_remove(added_coins, '${coinId}')FROM user_data WHERE id = '${userId}'`,
-    (error, results) => {
-      let newAddedCoinsArray = results.rows[0].array_remove;
-      db.query(
-        `UPDATE user_data SET added_coins = '{${newAddedCoinsArray}}' WHERE id = '${userId}' RETURNING added_coins`,
-        (error, results) => {
-          let newArray = results.rows[0].added_coins;
-          res.status(200).json({
-            newArray,
-            message: "Delete successful",
-          });
-        }
-      );
-    }
-  );
-  */
 });
 
 //Request para dados do usuário
@@ -159,29 +167,6 @@ router.post("/add-coin", (req, res) => {
   } catch (error) {
     console.log(error);
   }
-
-  /*
-  try {
-    db.query(
-      `SELECT added_coins FROM user_data WHERE id = '${userId}'`,
-      (error, results) => {
-        let oldAddedCoinsList = results.rows[0].added_coins;
-        let newAddedCoinsList = oldAddedCoinsList.concat(coinId);
-        db.query(
-          `UPDATE user_data SET added_coins = '{${newAddedCoinsList}}' WHERE id = '${userId}' RETURNING added_coins`,
-          (error, results) => {
-            let newAddedCoinsList = results.rows[0].added_coins;
-            res.status(200).json({
-              newAddedCoinsList,
-            });
-          }
-        );
-      }
-    );
-  } catch (error) {
-    console.log(error);
-  }
-  */
 });
 
 module.exports = router;

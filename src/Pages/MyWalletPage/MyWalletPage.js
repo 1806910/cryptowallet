@@ -14,6 +14,7 @@ function MyWalletPage() {
   const [addedCoins, setAddedCoins] = useState();
   const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedCoin, setSelectedCoin] = useState({});
 
   useEffect(() => {
     if (authenticated) {
@@ -68,10 +69,10 @@ function MyWalletPage() {
       })
       .catch((error) => console.log(error));
   }
-
+console.log(selectedCoin)
   return (
     <>
-      {isOpen && <Modal setIsOpen={setIsOpen} />}
+      {isOpen && <Modal setIsOpen={setIsOpen} selectedCoin={selectedCoin} setSelectedCoin={setSelectedCoin}/>}
 
       <div className="mywallet-side-menu">
         <SideMenu />
@@ -121,6 +122,7 @@ function MyWalletPage() {
                   qtt={coin.qtt}
                   buyprice={coin.buyprice}
                   setIsOpen={setIsOpen}
+                  setSelectedCoin={setSelectedCoin}
                 />
               );
             })
