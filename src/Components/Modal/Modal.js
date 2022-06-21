@@ -3,7 +3,7 @@ import api from "../../config/api/api";
 import { Context } from "../../Context/AuthContext";
 import "./styles.css";
 
-function Modal({ setIsOpen, selectedCoin, setSelectedCoin }) {
+function Modal({ setIsOpen, selectedCoin, setSelectedCoin, setUpdatedCoin }) {
   const [selectedCoinQTT, setSelectedCoinQTT] = useState();
   const [selectedCoinBuyprice, setSelectedCoinBuyprice] = useState();
   const { authenticated, user } = useContext(Context);
@@ -26,18 +26,15 @@ function Modal({ setIsOpen, selectedCoin, setSelectedCoin }) {
           }
         )
         .then((res) => {
-          let newAddedCoinsArray = res?.data?.newAddedCoinsArray;
-          newAddedCoinsArray?.array.forEach((element) => {
-            console.log(element);
-          });
+          let newAddedCoinsArray = res.data.newAddedCoinsArray;
+          console.log("foi", newAddedCoinsArray);
 
           setIsOpen(false);
-          setSelectedCoin({
-            coinIcon: selectedCoin.coinIcon,
-            coinName: selectedCoin.coinName,
-            coinId: selectedCoin.coinId,
+          setUpdatedCoin({
+            id: coinId,
+            qtt: coinQTT,
+            buyprice: coinBuyprice,
           });
-          console.log("foi", res.data.newAddedCoinsArray);
         })
         .catch((error) => console.log(error));
     }

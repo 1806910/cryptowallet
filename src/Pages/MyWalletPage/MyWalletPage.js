@@ -15,6 +15,7 @@ function MyWalletPage() {
   const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCoin, setSelectedCoin] = useState({});
+  const [updatedCoin, setUpdatedCoin] = useState({});
 
   useEffect(() => {
     if (authenticated) {
@@ -36,6 +37,16 @@ function MyWalletPage() {
     }
   }, [user]);
 
+  function handleCalculateProfit(coinList) {
+    let auxArray = [];
+    coinList?.forEach((coin) => {
+      coin.profit_or_loss =
+        coin.qtt * coin.current_price - coin.qtt * coin.buyprice;
+      auxArray.push(coin);
+    });
+    setAddedCoins(auxArray);
+  }
+
   function verifyAddedCoins(coins) {
     let auxArray = [];
     for (let i = 0; i < coins.length; i++) {
@@ -48,7 +59,7 @@ function MyWalletPage() {
         }
       }
     }
-    setAddedCoins(auxArray);
+    handleCalculateProfit(auxArray);
   }
 
   function handleDelete(id) {
@@ -69,10 +80,29 @@ function MyWalletPage() {
       })
       .catch((error) => console.log(error));
   }
-console.log(selectedCoin)
+
+  useEffect(() => {
+    let auxArray = [];
+
+    addedCoins?.forEach((coin) => {
+      if (coin.id === updatedCoin.id) {
+        coin.qtt = Number(updatedCoin.qtt);
+        coin.buyprice = Number(updatedCoin.buyprice);
+      }
+      auxArray.push(coin);
+    });
+    handleCalculateProfit(auxArray)
+  }, [updatedCoin]);
+
   return (
     <>
-      {isOpen && <Modal setIsOpen={setIsOpen} selectedCoin={selectedCoin} setSelectedCoin={setSelectedCoin}/>}
+      {isOpen && (
+        <Modal
+          setIsOpen={setIsOpen}
+          selectedCoin={selectedCoin}
+          setUpdatedCoin={setUpdatedCoin}
+        />
+      )}
 
       <div className="mywallet-side-menu">
         <SideMenu />
@@ -121,6 +151,7 @@ console.log(selectedCoin)
                   price={coin.current_price}
                   qtt={coin.qtt}
                   buyprice={coin.buyprice}
+                  profit_or_loss={coin.profit_or_loss}
                   setIsOpen={setIsOpen}
                   setSelectedCoin={setSelectedCoin}
                 />

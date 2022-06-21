@@ -10,6 +10,7 @@ function CoinRowWallet({
   price,
   qtt,
   buyprice,
+  profit_or_loss,
   setIsOpen,
   setSelectedCoin,
 }) {
@@ -50,10 +51,16 @@ function CoinRowWallet({
         <p>{qtt}</p>
       </div>
       <div className="coinrowwallet-coin-buyprice">
-        <p>$ {buyprice.toFixed(2)}</p>
+        <p>$ {buyprice?.toFixed(2)}</p>
       </div>
-      <div className="coinrowwallet-coin-profit-loss">
-        <p>$ </p>
+      <div
+        className={
+          profit_or_loss >= 0
+            ? "coinrowwallet-coin-profit-loss-green"
+            : "coinrowwallet-coin-profit-loss-red"
+        }
+      >
+        <p>$ {profit_or_loss?.toFixed(2)}</p>
       </div>
     </div>
   );
