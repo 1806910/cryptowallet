@@ -60,7 +60,7 @@ function CoinRowWallet({
             : "coinrowwallet-coin-profit-loss-red"
         }
       >
-        <p>$ {profit_or_loss?.toFixed(2)}</p>
+        <b>$ {profit_or_loss?.toFixed(2)}</b>
       </div>
     </div>
   );

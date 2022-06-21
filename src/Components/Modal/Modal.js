@@ -26,9 +26,6 @@ function Modal({ setIsOpen, selectedCoin, setSelectedCoin, setUpdatedCoin }) {
           }
         )
         .then((res) => {
-          let newAddedCoinsArray = res.data.newAddedCoinsArray;
-          console.log("foi", newAddedCoinsArray);
-
           setIsOpen(false);
           setUpdatedCoin({
             id: coinId,

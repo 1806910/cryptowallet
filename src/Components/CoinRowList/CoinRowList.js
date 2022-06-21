@@ -3,7 +3,6 @@ import { MdAddCircle } from "react-icons/md";
 import { MdRemoveCircle } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
-
 function CoinRowList({
   id,
   icon,
@@ -50,12 +49,12 @@ function CoinRowList({
       </div>
       <div
         className={
-          price_change_percentage_24h < 0
-            ? "coinrowlist-coin-change-red"
-            : "coinrowlist-coin-change-green"
+          price_change_percentage_24h >= 0
+            ? "coinrowlist-coin-change-green"
+            : "coinrowlist-coin-change-red"
         }
       >
-        <p>{price_change_percentage_24h?.toFixed(2)}%</p>
+        <b>{price_change_percentage_24h?.toFixed(2)}%</b>
       </div>
       <div className="coinrowlist-coin-marketcap">
         <p>$ {market_cap.toLocaleString()}</p>

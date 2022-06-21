@@ -51,7 +51,6 @@ function MyWalletPage() {
     let auxArray = [];
     for (let i = 0; i < coins.length; i++) {
       for (let j = 0; j < user?.teste_json?.length; j++) {
-        console.log("leng", user.teste_json.length);
         if (user?.teste_json[j].coin === coins[i].id) {
           coins[i].qtt = Number(user.teste_json[j].qtt);
           coins[i].buyprice = Number(user.teste_json[j].buyprice);
@@ -139,7 +138,6 @@ function MyWalletPage() {
           ) : (
             addedCoins &&
             addedCoins.map((coin) => {
-              console.log(addedCoins);
               return (
                 <CoinRowWallet
                   key={coin.id}
