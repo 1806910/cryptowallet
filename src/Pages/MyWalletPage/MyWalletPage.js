@@ -108,7 +108,7 @@ function MyWalletPage() {
       </div>
 
       <div className="mywallet-container">
-        <Header />
+        <Header hasSearchBar={false}/>
         <div className="mywallet-table-header">
           <div className="mywallet-coin-remove">
             <h5>#</h5>

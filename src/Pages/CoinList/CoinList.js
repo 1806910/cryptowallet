@@ -99,7 +99,7 @@ function CoinList() {
         <SideMenu />
       </div>
       <div className="coinlist-container">
-        <Header setSearch={setSearch} />
+        <Header setSearch={setSearch} hasSearchBar={true}/>
         <div className="coinlist-table-header">
           <div className="coinlist-coin-add">
             <h5>#</h5>

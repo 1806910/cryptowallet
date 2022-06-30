@@ -30,6 +30,10 @@
   height: 40px;
 }
 
+.search-container h1 {
+  margin-left: 15px;
+}
+
 
 .search-container-column3 {
   display: flex;
