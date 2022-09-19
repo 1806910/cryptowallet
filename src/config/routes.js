@@ -4,8 +4,10 @@ import Chart from "../Components/Chart/Chart";
 import { Context } from "../Context/AuthContext";
 import CoinInfo from "../Pages/CoinInfo/CoinInfo";
 import CoinList from "../Pages/CoinList/CoinList";
+import Exchanges from "../Pages/Exchanges/Exchanges";
 import LoginPage from "../Pages/LoginPage/LoginPage";
 import MyWalletPage from "../Pages/MyWalletPage/MyWalletPage";
+import TrendingCoins from "../Pages/TrendingCoins/TrendingCoins";
 
 function RouteConfig() {
   const { authenticated } = useContext(Context);
@@ -22,6 +24,8 @@ function RouteConfig() {
         path="/mywallet"
         element={authenticated ? <MyWalletPage /> : <LoginPage />}
       />
+      <Route path="/trending-coins" element={<TrendingCoins />} />
+      <Route path="/exchanges" element={<Exchanges />} />
     </Routes>
   );
 }

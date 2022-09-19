@@ -1,11 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../Context/AuthContext";
-import { FaWallet } from "react-icons/fa";
 
 import "./styles.css";
 
-function Header({ setSearch, hasSearchBar }) {
+function Header({ setSearch, hasSearchBar, title, icon }) {
   const { authenticated, handleLogout } = useContext(Context);
   let navigate = useNavigate();
   function handleChange(e) {
@@ -20,8 +19,8 @@ function Header({ setSearch, hasSearchBar }) {
           <input type="text" placeholder="Search" onChange={handleChange} />
         ) : (
           <>
-            <FaWallet size={35}/>
-            <h1>My Wallet</h1>
+            {icon}
+            <h1>{title}</h1>
           </>
         )}
       </div>

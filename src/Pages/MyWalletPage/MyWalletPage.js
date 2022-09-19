@@ -7,6 +7,7 @@ import Modal from "../../Components/Modal/Modal";
 import SideMenu from "../../Components/SideMenu/SideMenu";
 import api from "../../config/api/api";
 import { Context } from "../../Context/AuthContext";
+import { FaWallet } from "react-icons/fa";
 import "./styles.css";
 
 function MyWalletPage() {
@@ -90,7 +91,7 @@ function MyWalletPage() {
       }
       auxArray.push(coin);
     });
-    handleCalculateProfit(auxArray)
+    handleCalculateProfit(auxArray);
   }, [updatedCoin]);
 
   return (
@@ -108,7 +109,11 @@ function MyWalletPage() {
       </div>
 
       <div className="mywallet-container">
-        <Header hasSearchBar={false}/>
+        <Header
+          hasSearchBar={false}
+          title="My Wallet"
+          icon={<FaWallet size={35} />}
+        />
         <div className="mywallet-table-header">
           <div className="mywallet-coin-remove">
             <h5>#</h5>

@@ -1,8 +1,11 @@
 import React from "react";
 import { FaWallet } from "react-icons/fa";
 import { SiBitcoinsv } from "react-icons/si";
+import { AiFillFire } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+
 import "./styles.css";
+import { BsCurrencyExchange } from "react-icons/bs";
 
 const sideMenuData = [
   {
@@ -14,6 +17,16 @@ const sideMenuData = [
     title: "My Wallet",
     icon: <FaWallet />,
     url: "/mywallet",
+  },
+  {
+    title: "Trending Coins",
+    icon: <AiFillFire />,
+    url: "/trending-coins",
+  },
+  {
+    title: "Exchanges",
+    icon: <BsCurrencyExchange/>,
+    url: "/exchanges",
   },
 ];
 
