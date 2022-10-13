@@ -5,7 +5,7 @@ import { AiFillFire } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 
 import "./styles.css";
-import { BsCurrencyExchange } from "react-icons/bs";
+import { BsCurrencyExchange, BsGraphDown, BsGraphUp } from "react-icons/bs";
 
 const sideMenuData = [
   {
@@ -25,8 +25,18 @@ const sideMenuData = [
   },
   {
     title: "Exchanges",
-    icon: <BsCurrencyExchange/>,
+    icon: <BsCurrencyExchange />,
     url: "/exchanges",
+  },
+  {
+    title: "Top Performance 24h",
+    icon: <BsGraphUp />,
+    url: "/top-perf-coins",
+  },
+  {
+    title: "Low Performance 24h",
+    icon: <BsGraphDown />,
+    url: "/low-perf-coins",
   },
 ];
 

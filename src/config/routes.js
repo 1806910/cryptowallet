@@ -6,7 +6,9 @@ import CoinInfo from "../Pages/CoinInfo/CoinInfo";
 import CoinList from "../Pages/CoinList/CoinList";
 import Exchanges from "../Pages/Exchanges/Exchanges";
 import LoginPage from "../Pages/LoginPage/LoginPage";
+import LowPerfCoins from "../Pages/LowPerfCoins/LowPerfCoins";
 import MyWalletPage from "../Pages/MyWalletPage/MyWalletPage";
+import TopPerfCoins from "../Pages/TopPerfCoins/TopPerfCoins";
 import TrendingCoins from "../Pages/TrendingCoins/TrendingCoins";
 
 function RouteConfig() {
@@ -26,6 +28,8 @@ function RouteConfig() {
       />
       <Route path="/trending-coins" element={<TrendingCoins />} />
       <Route path="/exchanges" element={<Exchanges />} />
+      <Route path="/top-perf-coins" element={<TopPerfCoins />} />
+      <Route path="/low-perf-coins" element={<LowPerfCoins />} />
     </Routes>
   );
 }
